@@ -5,6 +5,11 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.drivetrain.Drivetrain;
+import frc.robot.drivetrain.commands.DrivetrainCmds;
+import frc.robot.pilot.PilotGamepad;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -13,15 +18,42 @@ import edu.wpi.first.wpilibj.TimedRobot;
  * project.
  */
 public class Robot extends TimedRobot {
+  public static PilotGamepad pilotGamepad;
+  public static Drivetrain drivetrain;
+
+  public static Timer sysTimer = new Timer();
+
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
    */
   @Override
-  public void robotInit() {}
+  public void robotInit() {
+    sysTimer.reset();
+    sysTimer.start();
+
+    System.out.println("Robot init-ted");
+
+    initSubsystems();
+
+    System.out.println("Init subsystems done");
+  }
+
+  private void initSubsystems() {
+    pilotGamepad = new PilotGamepad();
+    drivetrain = new Drivetrain();
+
+    System.out.println("gamepad and drivetrain made");
+
+    DrivetrainCmds.setupDefaultCommand();
+
+    System.out.println("setup default command for drivetrain");
+  }
 
   @Override
-  public void robotPeriodic() {}
+  public void robotPeriodic() {
+    CommandScheduler.getInstance().run();
+  }
 
   @Override
   public void autonomousInit() {}
@@ -30,7 +62,10 @@ public class Robot extends TimedRobot {
   public void autonomousPeriodic() {}
 
   @Override
-  public void teleopInit() {}
+  public void teleopInit() {
+    drivetrain.stop();
+    System.out.println("telop init-ted");
+  }
 
   @Override
   public void teleopPeriodic() {}
@@ -39,7 +74,9 @@ public class Robot extends TimedRobot {
   public void disabledInit() {}
 
   @Override
-  public void disabledPeriodic() {}
+  public void disabledPeriodic() {
+    CommandScheduler.getInstance().enable();
+  }
 
   @Override
   public void testInit() {}
