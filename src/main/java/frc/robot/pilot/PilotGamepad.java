@@ -9,6 +9,8 @@ public class PilotGamepad extends Gamepad {
         setupTeleopButtons();
         setupDisabledButtons();
         setupTestButtons();
+
+        System.out.println("Pilot Gamepad created");
     }
 
     public void setupTeleopButtons() {

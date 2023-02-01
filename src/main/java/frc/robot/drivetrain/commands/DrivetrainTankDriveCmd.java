@@ -13,7 +13,7 @@ public class DrivetrainTankDriveCmd extends CommandBase {
 
     private Drivetrain drivetrain;
 
-    // constructor
+    // Constructor for cmd; sets variables to access and requirements for interrupted
     public DrivetrainTankDriveCmd(DoubleSupplier leftspeed, DoubleSupplier rightSpeed) {
         this.drivetrain = Robot.drivetrain;
         addRequirements(drivetrain);
@@ -27,10 +27,13 @@ public class DrivetrainTankDriveCmd extends CommandBase {
 
     @Override
     public void execute() {
+        // if teleop is enabld:
         if (DriverStation.isTeleop()) {
+            // get left and right speed from stick on controller
             double leftSpeed = leftSpeedSupplier.getAsDouble();
             double rightSpeed = rightSpeedSupplier.getAsDouble();
 
+            // call tank drive method in drivetrain and pass in left/right speeds
             drivetrain.tankDriveAbs(leftSpeed, rightSpeed);
         } else {
             drivetrain.stop();
@@ -39,6 +42,7 @@ public class DrivetrainTankDriveCmd extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
+        // when command ends, stop drivetrain
         drivetrain.stop();
     }
 }

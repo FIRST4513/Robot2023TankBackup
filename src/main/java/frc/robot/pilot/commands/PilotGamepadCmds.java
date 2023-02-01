@@ -12,6 +12,8 @@ public class PilotGamepadCmds {
     }
 
     public static Command tankDrive() {
+        System.out.println("\nTank drive called;\nLeft Input  /  Right Input\n" + Robot.pilotGamepad.getLeftInput() + ", " + Robot.pilotGamepad.getRightInput());
+        
         return new DrivetrainTankDriveCmd(() -> Robot.pilotGamepad.getLeftInput(), () -> Robot.pilotGamepad.getRightInput());
     }
 

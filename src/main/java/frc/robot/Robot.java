@@ -18,9 +18,11 @@ import frc.robot.pilot.PilotGamepad;
  * project.
  */
 public class Robot extends TimedRobot {
+  // Declaration of substystems
   public static PilotGamepad pilotGamepad;
   public static Drivetrain drivetrain;
 
+  // Declaration and Instantiation of timer
   public static Timer sysTimer = new Timer();
 
   /**
@@ -29,6 +31,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    // Reset and start timer, then intialize robot subsystems
     sysTimer.reset();
     sysTimer.start();
 
@@ -40,11 +43,13 @@ public class Robot extends TimedRobot {
   }
 
   private void initSubsystems() {
+    // Instantiate subsystems
     pilotGamepad = new PilotGamepad();
     drivetrain = new Drivetrain();
 
     System.out.println("gamepad and drivetrain made");
 
+    // setup default commands
     DrivetrainCmds.setupDefaultCommand();
 
     System.out.println("setup default command for drivetrain");
@@ -63,6 +68,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    // Once teleop is enable, set motors to 0 to start with
     drivetrain.stop();
     System.out.println("telop init-ted");
   }
