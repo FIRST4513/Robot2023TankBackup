@@ -22,11 +22,11 @@ public class DrivetrainConfig {
         public static final String frontMotorName = "Right Front";
         public static final String backMotorName = "Right Back";
 
-        public static final int frontMotorID = RobotConfig.Motors.LeftMotorFrontID;
-        public static final int backMotorID = RobotConfig.Motors.LeftMotorBackID;
+        public static final int frontMotorID = RobotConfig.Motors.RightMotorFrontID;
+        public static final int backMotorID = RobotConfig.Motors.RightMotorBackID;
         
-        public static final boolean frontInverted = false;
-        public static final boolean backInverted = false;
+        public static final boolean frontInverted = true;
+        public static final boolean backInverted = true;
         
         public static final NeutralMode frontBrakeMode = NeutralMode.Brake;  // default
         public static final NeutralMode backBrakeMode = NeutralMode.Brake;

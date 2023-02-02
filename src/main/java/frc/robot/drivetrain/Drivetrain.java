@@ -41,6 +41,8 @@ public class Drivetrain extends SubsystemBase {
         RightBack.setNeutralMode(DrivetrainConfig.RightMotors.backBrakeMode);
 
         System.out.println("Drivetrain- Right Back made");
+
+        stopAlt();
     }
 
     // method for driving the wheels by tank drive,
@@ -52,8 +54,43 @@ public class Drivetrain extends SubsystemBase {
         RightBack.set(rightSpeed);
     }
 
+    // method for driving the wheel by arcade drive
+    // forward speed -1 to 1
+    // turn speed -1 to 1 factor
+    public void arcadeDriveABS(double forwardSpeed, double turnAmount) {
+        double leftSpeed = forwardSpeed - (2.0f * (turnAmount/3));
+        double rightSpeed = forwardSpeed + (2.0f * (turnAmount/3));
+        leftSpeed = constrainTo1(leftSpeed);
+        rightSpeed = constrainTo1(rightSpeed);
+
+        tankDriveAbs(leftSpeed, rightSpeed);
+    }
+
+    private double constrainTo1(double input) {
+        double output;
+        if (input > 1) {
+            output = 1;
+        } else if (input < -1) {
+            output = -1;
+        } else {
+            output = input;
+        }
+        return output;
+    }
+
+    public void testMotor() {
+        RightBack.set(0.5);
+    }
+
     // stop motors by setting them to 0
     public void stop() {
         tankDriveAbs(0, 0);
+    }
+
+    public void stopAlt() {
+        LeftFront.stopMotor();
+        LeftBack.stopMotor();
+        RightFront.stopMotor();
+        RightBack.stopMotor();
     }
 }
