@@ -4,8 +4,10 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.drivetrain.Drivetrain;
 import frc.robot.drivetrain.commands.DrivetrainCmds;
@@ -21,6 +23,9 @@ public class Robot extends TimedRobot {
   // Declaration of substystems
   public static PilotGamepad pilotGamepad;
   public static Drivetrain drivetrain;
+
+  // Declaration of sensor
+  public static AnalogInput IRSensor = new AnalogInput(0);
 
   // Declaration and Instantiation of timer
   public static Timer sysTimer = new Timer();
@@ -58,6 +63,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
+    SmartDashboard.putNumber("IR Sensor Reading", IRSensor.getAverageVoltage());
   }
 
   @Override
