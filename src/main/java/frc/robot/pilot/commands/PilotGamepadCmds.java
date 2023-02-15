@@ -3,6 +3,7 @@ package frc.robot.pilot.commands;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.Robot;
 import frc.robot.drivetrain.commands.DrivetrainTankDriveCmd;
@@ -28,13 +29,17 @@ public class PilotGamepadCmds {
     }
 
     public static Command stickDriveTriggerTurn() {
-        DoubleSupplier forwardPower = () -> Robot.pilotGamepad.getLeftStickY();
-        DoubleSupplier turnAmount = () -> Robot.pilotGamepad.getTriggerDrifference() * -1;
+        DoubleSupplier forwardPower = () -> Robot.pilotGamepad.getLeftStickY()/2;
+        DoubleSupplier turnAmount = () -> Robot.pilotGamepad.getTriggerDrifference() * -0.5;
         return new DrivetrainArcadeDriveCmd(forwardPower, turnAmount);
     }
 
     /** Command that can be used to rumble the pilot controller */
     public static Command rumblePilotCmd(double intensity) {
         return new RunCommand(() -> Robot.pilotGamepad.rumble(intensity), Robot.pilotGamepad);
+    }
+
+    public static Command resetGyroCmd() {
+        return new InstantCommand(() -> Robot.drivetrain.gyro.resetGyro(0));
     }
 }

@@ -1,12 +1,16 @@
 package frc.robot.drivetrain;
 
+import org.xml.sax.SAXNotRecognizedException;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drivetrain extends SubsystemBase {
     // declare LF, LB, RF, and RB motors as WPI_TalonFX objects
     private WPI_TalonFX LeftFront, LeftBack, RightFront, RightBack;
+    public Gyro gyro;
 
     // Constructor
     public Drivetrain() {
@@ -43,6 +47,18 @@ public class Drivetrain extends SubsystemBase {
         System.out.println("Drivetrain- Right Back made");
 
         stopAlt();
+
+        gyro = new Gyro();
+        gyro.resetGyro();
+    }
+
+    public void periodic() {
+        // claculated data, applies offsets and wrapping, inverts angle, etc.
+        SmartDashboard.putNumber("Gyro Yaw", gyro.getGyroYawAngle());
+        // pure data from gyro
+        SmartDashboard.putNumber("Gyro Raw Yaw", gyro.gyro.getYaw());
+        // incline
+        SmartDashboard.putNumber("Gyro Incline", gyro.getGyroIncline());
     }
 
     // method for driving the wheels by tank drive,

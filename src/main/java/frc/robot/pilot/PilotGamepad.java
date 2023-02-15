@@ -2,6 +2,7 @@ package frc.robot.pilot;
 
 import frc.lib.gamepads.Gamepad;
 import frc.robot.Robot;
+import frc.robot.pilot.commands.PilotGamepadCmds;
 
 public class PilotGamepad extends Gamepad {
     private PilotGamepadTelemtry telemetry;
@@ -19,6 +20,7 @@ public class PilotGamepad extends Gamepad {
     }
 
     public void setupTeleopButtons() {
+        gamepad.yButton.onTrue(PilotGamepadCmds.resetGyroCmd());
     }
 
     public void setupDisabledButtons() {
