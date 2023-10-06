@@ -10,9 +10,6 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.drivetrain.Drivetrain;
-import frc.robot.drivetrain.commands.DrivetrainCmds;
-import frc.robot.pilot.PilotGamepad;
-
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -21,7 +18,6 @@ import frc.robot.pilot.PilotGamepad;
  */
 public class Robot extends TimedRobot {
   // Declaration of substystems
-  public static PilotGamepad pilotGamepad;
   public static Drivetrain drivetrain;
 
   // Declaration of sensor
@@ -49,13 +45,9 @@ public class Robot extends TimedRobot {
 
   private void initSubsystems() {
     // Instantiate subsystems
-    pilotGamepad = new PilotGamepad();
     drivetrain = new Drivetrain();
 
     System.out.println("gamepad and drivetrain made");
-
-    // setup default commands
-    DrivetrainCmds.setupDefaultCommand();
 
     System.out.println("setup default command for drivetrain");
   }

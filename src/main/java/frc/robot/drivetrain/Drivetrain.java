@@ -1,112 +1,40 @@
 package frc.robot.drivetrain;
 
-import org.xml.sax.SAXNotRecognizedException;
-
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotConfig;
 
 public class Drivetrain extends SubsystemBase {
-    // declare LF, LB, RF, and RB motors as WPI_TalonFX objects
-    private WPI_TalonFX LeftFront, LeftBack, RightFront, RightBack;
-    public Gyro gyro;
+    private WPI_TalonFX leftFront, leftBack, rightFront, rightBack;
 
-    // Constructor
+    // Constructor - sets up some things
     public Drivetrain() {
-        // Instantiate and config Left Front motor
-        LeftFront = new WPI_TalonFX(DrivetrainConfig.LeftMotors.frontMotorID);
-        LeftFront.configFactoryDefault();
-        LeftFront.setInverted(DrivetrainConfig.LeftMotors.frontInverted);
-        LeftFront.setNeutralMode(DrivetrainConfig.LeftMotors.frontBrakeMode);
+        leftFront = new WPI_TalonFX(RobotConfig.Motors.LeftMotorFrontID);
+        leftBack = new WPI_TalonFX(RobotConfig.Motors.LeftMotorBackID);
+        rightFront = new WPI_TalonFX(RobotConfig.Motors.RightMotorFrontID);
+        rightBack = new WPI_TalonFX(RobotConfig.Motors.RightMotorBackID);
 
-        System.out.println("Drivetrain- Left Front made");
-
-        // Instantiate and config Left Back motor
-        LeftBack = new WPI_TalonFX(DrivetrainConfig.LeftMotors.backMotorID);
-        LeftBack.configFactoryDefault();
-        LeftBack.setInverted(DrivetrainConfig.LeftMotors.backInverted);
-        LeftBack.setNeutralMode(DrivetrainConfig.LeftMotors.backBrakeMode);
-
-        System.out.println("Drivetrain- Left Back made");
-
-        // Instantiate and config Right Front motor
-        RightFront = new WPI_TalonFX(DrivetrainConfig.RightMotors.frontMotorID);
-        RightFront.configFactoryDefault();
-        RightFront.setInverted(DrivetrainConfig.RightMotors.frontInverted);
-        RightFront.setNeutralMode(DrivetrainConfig.RightMotors.frontBrakeMode);
-
-        System.out.println("Drivetrain- Right Front made");
-
-        // Instantiate and config Right Back motor
-        RightBack = new WPI_TalonFX(DrivetrainConfig.RightMotors.backMotorID);
-        RightBack.configFactoryDefault();
-        RightBack.setInverted(DrivetrainConfig.RightMotors.backInverted);
-        RightBack.setNeutralMode(DrivetrainConfig.RightMotors.backBrakeMode);
-
-        System.out.println("Drivetrain- Right Back made");
-
-        stopAlt();
-
-        gyro = new Gyro();
-        gyro.resetGyro();
+        leftFront.configFactoryDefault();
+        leftBack.configFactoryDefault();
+        rightFront.configFactoryDefault();
+        rightBack.configFactoryDefault();
     }
 
-    public void periodic() {
-        // claculated data, applies offsets and wrapping, inverts angle, etc.
-        SmartDashboard.putNumber("Gyro Yaw", gyro.getGyroYawAngle());
-        // pure data from gyro
-        SmartDashboard.putNumber("Gyro Raw Yaw", gyro.gyro.getYaw());
-        // incline
-        SmartDashboard.putNumber("Gyro Incline", gyro.getGyroIncline());
-    }
-
-    // method for driving the wheels by tank drive,
-    // accepts motor values: -1 to 1
-    public void tankDriveAbs(double leftSpeed, double rightSpeed) {
-        LeftFront.set(leftSpeed);
-        LeftBack.set(leftSpeed);
-        RightFront.set(rightSpeed);
-        RightBack.set(rightSpeed);
-    }
-
-    // method for driving the wheel by arcade drive
-    // forward speed -1 to 1
-    // turn speed -1 to 1 factor
-    public void arcadeDriveABS(double forwardSpeed, double turnAmount) {
-        double leftSpeed = forwardSpeed - (2.0f * (turnAmount/3));
-        double rightSpeed = forwardSpeed + (2.0f * (turnAmount/3));
-        leftSpeed = constrainTo1(leftSpeed);
-        rightSpeed = constrainTo1(rightSpeed);
-
-        tankDriveAbs(leftSpeed, rightSpeed);
-    }
-
-    private double constrainTo1(double input) {
-        double output;
-        if (input > 1) {
-            output = 1;
-        } else if (input < -1) {
-            output = -1;
-        } else {
-            output = input;
-        }
-        return output;
-    }
-
-    public void testMotor() {
-        RightBack.set(0.5);
-    }
-
-    // stop motors by setting them to 0
     public void stop() {
-        tankDriveAbs(0, 0);
+        leftFront.stopMotor();
+        leftBack.stopMotor();
+        rightFront.stopMotor();
+        rightBack.stopMotor();
     }
 
-    public void stopAlt() {
-        LeftFront.stopMotor();
-        LeftBack.stopMotor();
-        RightFront.stopMotor();
-        RightBack.stopMotor();
+    public void move(float leftSpeed, float rightSpeed) {
+    // output ^      ^ input
+        leftFront.set(leftSpeed);
+        // [left Back]
+        rightFront.set(rightSpeed);
+        // [right Back]
     }
+
+    // turn + speed function here
 }
