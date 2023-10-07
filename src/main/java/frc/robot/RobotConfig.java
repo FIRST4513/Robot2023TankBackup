@@ -11,5 +11,13 @@ public final class RobotConfig {
         public static final int LeftMotorBackID   = 2;  // CAN ID for Talon SRX
         public static final int RightMotorFrontID = 3;  // CAN ID for Talon SRX
         public static final int RightMotorBackID  = 4;  // CAN ID for Talon SRX
+
+        public static final int IntakeMotorBackID = 5;  // CAN ID for Talon SRX
+        public static final int ArmMotorID        = 6;  // CAN ID for Talon SRX
+    }
+
+    // Port Numbers for controlers and/or joysticks
+    public final class Gamepads {
+        public static final int PilotGamepadPort   = 0;  // Port for pilot xbox controller
     }
 }

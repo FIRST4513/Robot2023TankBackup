@@ -1,5 +1,5 @@
 package frc.robot.drivetrain;
 
-public class DrivetrainConfig {
+public class drivetrainConfig {
 
 }
