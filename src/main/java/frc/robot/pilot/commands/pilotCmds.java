@@ -6,11 +6,11 @@ import frc.robot.Robot;
 
 public class pilotCmds {
     public static Command LeftRightStickDrive() {
-        return new RunCommand(                    // command
-            () -> Robot.drivetrain.move(          // function (in this case, move in drivetrain)
+        return new RunCommand(                  // command
+            () -> Robot.drivetrain.move(        // function (in this case, move in drivetrain)
                 Robot.pilot.getLeftStickY(),    // leftSpeed
                 Robot.pilot.getRightStickY()),  // rightSpeed
-            Robot.drivetrain);                         // subsystem doing things, can't have interference
+            Robot.drivetrain);                  // subsystem doing things, can't have interference
     }
 
     public static Command SpeedRotateTriggerDrive() {
