@@ -27,10 +27,17 @@ public class pilot extends Gamepad {
     
     // ----- CUSTOM DRIVE METHODS -----
     public double getLeftStickY() {
-        return this.gamepad.leftStick.getY();
+        return this.gamepad.leftStick.getY() * pilotConfig.globalScaler;
     }
 
     public double getRightStickY() {
-        return this.gamepad.rightStick.getY();
+        return this.gamepad.rightStick.getY() * pilotConfig.globalScaler;
+    }
+
+    public double getTriggerDifference() {
+        double left = this.gamepad.leftTriggerButton.getAxis();
+        double right = this.gamepad.rightTriggerButton.getAxis();
+        double difference = right-left;
+        return difference;
     }
 }

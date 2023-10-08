@@ -8,7 +8,7 @@ import frc.robot.pilot.commands.pilotCmds;
 public class drivetrainCmds {
     // default command - runs at all times
     public static void setupDefaultCommand() {
-        Robot.drivetrain.setDefaultCommand(pilotCmds.throttleDrive());
+        Robot.drivetrain.setDefaultCommand(pilotCmds.SpeedRotateTriggerDrive());
     }
 
     // quick test command

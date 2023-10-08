@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.drivetrain.drivetrain;
+import frc.robot.drivetrain.commands.drivetrainCmds;
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -40,12 +41,20 @@ public class Robot extends TimedRobot {
     initSubsystems();
 
     System.out.println("Init subsystems done");
+
+    setupDefaultCommands();
+
+    System.out.println("Default Commands setup");
   }
 
   private void initSubsystems() {
     // Instantiate subsystems (make it contain stuff)
     drivetrain = new drivetrain();
     pilot = new pilot();
+  }
+
+  private void setupDefaultCommands() {
+    drivetrainCmds.setupDefaultCommand();
   }
 
   @Override

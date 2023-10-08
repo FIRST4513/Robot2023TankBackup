@@ -7,11 +7,16 @@ public final class RobotConfig {
 
     // CAN IDs for the motors on the robot
     public final class Motors {
-        public static final int LeftMotorFrontID  = 1;  // CAN ID for Talon SRX
-        public static final int LeftMotorBackID   = 2;  // CAN ID for Talon SRX
-        public static final int RightMotorFrontID = 3;  // CAN ID for Talon SRX
-        public static final int RightMotorBackID  = 4;  // CAN ID for Talon SRX
+        // Main Motors Drive
+        public static final int LeftMotorBackID   = 1;  // CAN ID for Talon SRX
+        public static final int RightMotorBackID  = 2;  // CAN ID for Talon SRX
 
+        // Secondary Motors Drive
+        
+        public static final int LeftMotorFrontID  = 3;  // CAN ID for Talon SRX
+        public static final int RightMotorFrontID = 4;  // CAN ID for Talon SRX
+
+        // Intake and Arm Motors
         public static final int IntakeMotorBackID = 5;  // CAN ID for Talon SRX
         public static final int ArmMotorID        = 6;  // CAN ID for Talon SRX
     }

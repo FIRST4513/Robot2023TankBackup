@@ -19,6 +19,16 @@ public class drivetrain extends SubsystemBase {
         leftBack.configFactoryDefault();
         rightFront.configFactoryDefault();
         rightBack.configFactoryDefault();
+
+        leftFront.setInverted(drivetrainConfig.leftInverted);
+        leftBack.setInverted(drivetrainConfig.leftInverted);
+        rightFront.setInverted(drivetrainConfig.rightInverted);
+        rightBack.setInverted(drivetrainConfig.rightInverted);
+
+        leftFront.setNeutralMode(drivetrainConfig.neutralMode);
+        leftBack.setNeutralMode(drivetrainConfig.neutralMode);
+        rightFront.setNeutralMode(drivetrainConfig.neutralMode);
+        rightBack.setNeutralMode(drivetrainConfig.neutralMode);
     }
 
     public void stop() {
@@ -34,6 +44,27 @@ public class drivetrain extends SubsystemBase {
         leftBack.set(leftSpeed);
         rightFront.set(rightSpeed);
         rightBack.set(rightSpeed);
+    }
+
+    public void arcadeDrive(double forwardSpeed, double turnAmount) {
+        double leftSpeed = forwardSpeed - (2.0f * (turnAmount/3));
+        double rightSpeed = forwardSpeed + (2.0f * (turnAmount/3));
+        leftSpeed = constrainTo1(leftSpeed);
+        rightSpeed = constrainTo1(rightSpeed);
+
+        move(leftSpeed, rightSpeed);
+    }
+
+    private double constrainTo1(double input) {
+        double output;
+        if (input > 1) {
+            output = 1;
+        } else if (input < -1) {
+            output = -1;
+        } else {
+            output = input;
+        }
+        return output;
     }
 
     // turn + speed function here
