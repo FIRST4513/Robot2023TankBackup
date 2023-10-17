@@ -8,12 +8,14 @@ import frc.robot.pilot.commands.pilotCmds;
 public class drivetrainCmds {
     // default command - runs at all times
     public static void setupDefaultCommand() {
-        Robot.drivetrain.setDefaultCommand(pilotCmds.SpeedRotateTriggerDrive());
+        Robot.drivetrain.setDefaultCommand(pilotCmds.LeftRightStickDrive());
     }
 
     // quick test command
     public static Command testMotorCmd() {
-        return new RunCommand(() -> Robot.drivetrain.move(0.5, 0.5), Robot.drivetrain)
-            .withTimeout(2);
+        return new RunCommand(                      // Command (runs forever) ...
+            () -> Robot.drivetrain.move(0.5, 0.5),  // Function (moves motors at 0.5 speed)
+            Robot.drivetrain)                       // Subsytem required
+        .withTimeout(2);                            // ... until 2 seconds runs out
     }
 }

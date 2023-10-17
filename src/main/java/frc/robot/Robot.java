@@ -48,7 +48,7 @@ public class Robot extends TimedRobot {
   }
 
   private void initSubsystems() {
-    // Instantiate subsystems (make it contain stuff)
+    // Instantiate subsystems (make them exist)
     drivetrain = new drivetrain();
     pilot = new pilot();
   }

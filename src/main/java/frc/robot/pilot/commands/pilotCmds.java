@@ -5,20 +5,40 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.Robot;
 
 public class pilotCmds {
+    // Command to drive the robot by left-right stick drive
+    // Controller: Xbox
+    // Left stick: Controls left motors speed
+    // Right stick: Controls right motors speed
     public static Command LeftRightStickDrive() {
-        return new RunCommand(                  // command
-            () -> Robot.drivetrain.move(        // function (in this case, move in drivetrain)
-                Robot.pilot.getLeftStickY(),    // leftSpeed
-                Robot.pilot.getRightStickY()),  // rightSpeed
-            Robot.drivetrain);                  // subsystem doing things, can't have interference
+        return new RunCommand(                   // Command (runs forever)
+            () -> Robot.drivetrain.move(         // Function (in this case, move in drivetrain)
+                Robot.pilot.getLeftStickY(),     // leftSpeed
+                Robot.pilot.getRightStickY()),   // rightSpeed
+            Robot.drivetrain);                   // Subsystem doing things, so commands don't clash
     }
 
+    // Command to drive thr robot by Stick & Trigger
+    // Controller: Xbox
+    // Left Stick Y: Controls forward/backward speed
+    // Triggers: Controls Rotation amount [Difference]
     public static Command SpeedRotateTriggerDrive() {
-        return new RunCommand(
-            () -> Robot.drivetrain.arcadeDrive(
-                Robot.pilot.getLeftStickY(),
-                Robot.pilot.getTriggerDifference()
-            ),
-            Robot.drivetrain);
+        return new RunCommand(                        // Command (runs forever)
+            () -> Robot.drivetrain.arcadeDrive(       // Function (in this case, arcadeDrive in drivetrain)
+                Robot.pilot.getLeftStickY(),          // forwardSpeed
+                Robot.pilot.getTriggerDifference()),  // turnAmount
+            Robot.drivetrain);                        // Subsystem required
+    }
+
+    // Command to drive by joystick
+    // Controller: Joystick
+    // Y Direction: forward/backwards speed
+    // Twist: rotaion amount
+    // Throttle: scalar of all inputs
+    public static Command joyDrive() {
+        return new RunCommand(                   // Command
+            () -> Robot.drivetrain.arcadeDrive(  // Function
+                Robot.pilot.getJoyY(),           // forwardSpeed
+                Robot.pilot.getJoyTwist()),      // turnAmount
+            Robot.drivetrain);                   // Subsystem required
     }
 }
