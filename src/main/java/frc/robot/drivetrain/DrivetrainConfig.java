@@ -9,4 +9,7 @@ public class drivetrainConfig {
 
     // What type of mode to have the motors coast in
     public static NeutralMode neutralMode = NeutralMode.Brake;
+
+    // Value to scale encoder values by to get distance in [inches/meters]
+    public static double encoderScale = 1.0;
 }

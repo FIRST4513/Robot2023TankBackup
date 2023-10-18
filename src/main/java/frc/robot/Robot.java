@@ -6,9 +6,15 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.Commands;
+import frc.robot.arm.arm;
+import frc.robot.arm.commands.armCmds;
 import frc.robot.drivetrain.drivetrain;
 import frc.robot.drivetrain.commands.drivetrainCmds;
+import frc.robot.intake.intake;
+import frc.robot.intake.commands.intakeCmds;
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -19,7 +25,11 @@ import frc.robot.pilot.pilot;
 public class Robot extends TimedRobot {
   // Declaration of substystems
   public static drivetrain drivetrain;
+  public static arm arm;
+  public static intake intake;
   public static pilot pilot;
+  public static RobotTelemetry telemetry;
+  // public static copilot copilot;
 
   // OPTIONAL: Declaration and Instantiation of timer
   public static Timer sysTimer = new Timer();
@@ -50,11 +60,18 @@ public class Robot extends TimedRobot {
   private void initSubsystems() {
     // Instantiate subsystems (make them exist)
     drivetrain = new drivetrain();
+    arm = new arm();
+    intake = new intake();
     pilot = new pilot();
+    telemetry = new RobotTelemetry();
+    // copilot = new copilot();
   }
 
   private void setupDefaultCommands() {
     drivetrainCmds.setupDefaultCommand();
+    armCmds.setupDefaultCommand();
+    intakeCmds.setupDefaultCommand();
+    // pilot does not have a defualt command (yet)
   }
 
   @Override
@@ -72,6 +89,11 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
     // When teleoperated mode is enabled, stop the motors
     drivetrain.stop();
+    arm.stopMotor();
+    intake.stopMotor();
+
+    // reset commands and buttons
+    resetCommandsAndButtons();
   }
 
   @Override
@@ -96,4 +118,11 @@ public class Robot extends TimedRobot {
 
   @Override
   public void simulationPeriodic() {}
+
+  // misc methods
+  public static void resetCommandsAndButtons() {
+    CommandScheduler.getInstance().cancelAll();
+    CommandScheduler.getInstance().getActiveButtonLoop().clear();
+    pilot.resetConfig();
+  }
 }

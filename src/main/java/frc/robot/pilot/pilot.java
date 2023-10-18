@@ -1,8 +1,12 @@
 package frc.robot.pilot;
 
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.lib.gamepads.Gamepad;
+import frc.robot.Robot;
 import frc.robot.RobotConfig;
+import frc.robot.arm.commands.armCmds;
 import frc.robot.drivetrain.commands.drivetrainCmds;
+import frc.robot.intake.commands.intakeCmds;
 
 public class pilot extends Gamepad {
     // Constructor: Sets up gamepad to be used
@@ -16,8 +20,14 @@ public class pilot extends Gamepad {
     // ---------- GAMEPAD SPECIFIC COMMANDS ----------
     // Function to setup buttons for when the robot is in Teleop mode (used often)
     public void setupTeleopButtons() {
-        // Call a command to test motors when the A button is pressed
-        this.gamepad.aButton.onTrue(drivetrainCmds.testMotorCmd());
+        // intake stuff
+        gamepad.leftBumper.whileTrue(intakeCmds.intakeEjectCmd());
+        gamepad.rightBumper.whileTrue(intakeCmds.intakeRetractCmd());
+        gamepad.yButton.whileTrue(intakeCmds.intakeHoldCmd());
+        // gamepad.xButton.onTrue(intakeCmds.stopIntakeCmd());
+
+        // arm stuff
+        gamepad.aButton.whileTrue(armCmds.armByPilotCmd());
     }
 
     // Disabled buttons (almost never used)
@@ -29,13 +39,13 @@ public class pilot extends Gamepad {
     // ---------- CUSTOM DRIVE METHODS ----------
 
     // Method to get: Xbox Left Stick Y
-    // Range: [-1 to 1]
+    // Range: [(-1 to 1) * scaler]
     public double getLeftStickY() {
         return this.gamepad.leftStick.getY() * pilotConfig.globalScaler;
     }
 
     // Method to get: Xbox Right Stick Y
-    // Range: [-1 to 1]
+    // Range: [(-1 to 1) * scaler]
     public double getRightStickY() {
         return this.gamepad.rightStick.getY() * pilotConfig.globalScaler;
     }
@@ -49,21 +59,7 @@ public class pilot extends Gamepad {
         return difference;
     }
 
-    // Method to get: Joystick Y
-    // Range: [-1 to 1]
-    public double getJoyY() {
-        return this.gamepad.getY();
-    }
-
-    // Method to get: Joystick Twist
-    // Range: [-1 to 1]
-    public double getJoyTwist() {
-        return this.gamepad.getTwist();
-    }
-
-    // Method to get: Joystick Throttle
-    // Range: [0 to 1]
-    public double getJoyThrottle() {
-        return this.gamepad.getThrottle();
+    public double getTriggerDifferenceScaled() {
+        return getTriggerDifference() * pilotConfig.globalScaler;
     }
 }

@@ -1,0 +1,8 @@
+Real Stow Pos:        110º
+Real Ground Pos:      15º
+Real HP Pickup Pos:   90-20º
+
+12º absolute position: -454
+90º absolute position: 430
+
+Need intake reverse:   true

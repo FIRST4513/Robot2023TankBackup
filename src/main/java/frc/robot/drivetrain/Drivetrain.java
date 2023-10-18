@@ -37,6 +37,8 @@ public class drivetrain extends SubsystemBase {
         rightBack.setNeutralMode(drivetrainConfig.neutralMode);
     }
 
+    // ---------- SETTER METHODS ----------
+
     public void stop() {
         // Stop motors
         leftFront.stopMotor();
@@ -84,5 +86,14 @@ public class drivetrain extends SubsystemBase {
         }
         // give back the new value
         return output;
+    }
+
+    // ---------- GETTER METHODS ----------
+    public double getLeftSpeed() {
+        return leftFront.get();
+    }
+
+    public double getRightSpeed() {
+        return rightFront.get();
     }
 }
