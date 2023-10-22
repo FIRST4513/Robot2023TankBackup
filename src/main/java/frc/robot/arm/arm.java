@@ -49,6 +49,14 @@ public class arm extends SubsystemBase {
         return targetArmAngle;
     }
 
+    public boolean isAtTarget() {
+        if (((targetArmAngle-armConfig.isAtTargetError) < currentArmAngle) && (currentArmAngle < (targetArmAngle+armConfig.isAtTargetError))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public double encCountsToAngle(double counts) {
         return (counts - armConfig.encCountOffset) * armConfig.encDegsPerCount;
     }
@@ -59,7 +67,7 @@ public class arm extends SubsystemBase {
 
     public void driveMotorByMM() {
         armMotor.set(ControlMode.MotionMagic, encAngleToCounts(targetArmAngle),
-                     DemandType.ArbitraryFeedForward, 0.0);
+                     DemandType.ArbitraryFeedForward, armSRXMotorConfig.feedForwardScaler);
     }
 
     public void setMMAngle(double newAngle) {

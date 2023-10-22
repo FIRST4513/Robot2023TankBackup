@@ -1,28 +1,34 @@
-package frc.robot.pilot;
+package frc.robot.copilot;
 
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.lib.gamepads.Gamepad;
 import frc.robot.Robot;
 import frc.robot.RobotConfig;
 import frc.robot.arm.commands.armCmds;
+import frc.robot.copilot.commands.copilotCmds;
 import frc.robot.drivetrain.commands.drivetrainCmds;
 import frc.robot.intake.commands.intakeCmds;
-import frc.robot.pilot.commands.pilotCmds;
 
-public class pilot extends Gamepad {
+public class copilot extends Gamepad {
     // Constructor: Sets up gamepad to be used
-    public pilot() {
+    public copilot() {
         // Since we are extending (taking code from Gamepad) (also called Inheritance)
         // We need to call the pilot() function in the Gamepad libraries with super.
         // Further sets up the pilot gamepad
-        super("Pilot Gamepad", RobotConfig.Gamepads.PilotGamepadPort);
+        super("Co-Pilot Gamepad", RobotConfig.Gamepads.CopilotGamepadPort);
     }
 
     // ---------- GAMEPAD SPECIFIC COMMANDS ----------
-    
     // Function to setup buttons for when the robot is in Teleop mode (used often)
     public void setupTeleopButtons() {
-        this.gamepad.aButton.whileTrue(pilotCmds.pilotHaltDrivetrainCmd());
+        // buttons to manually halt arm & intake
+        this.gamepad.rightBumper.whileTrue(copilotCmds.haltArmIntakeCmd());
+        
+        // preset position buttons - determined by Isaac
+        this.gamepad.xButton.onTrue(armCmds.armToStowCmd());
+        this.gamepad.yButton.onTrue(armCmds.armToStowCmd());
+        this.gamepad.bButton.onTrue(armCmds.armToStationCmd());
+        this.gamepad.aButton.onTrue(armCmds.armToGroundCmd());
     }
 
     // Disabled buttons (almost never used)
@@ -34,15 +40,15 @@ public class pilot extends Gamepad {
     // ---------- CUSTOM DRIVE METHODS ----------
 
     // Method to get: Xbox Left Stick Y
-    // Range: [(-1 to 1) * scaler]
+    // Range: [-1 to 1]
     public double getLeftStickY() {
-        return this.gamepad.leftStick.getY() * pilotConfig.globalScaler;
+        return this.gamepad.leftStick.getY();
     }
 
     // Method to get: Xbox Right Stick Y
-    // Range: [(-1 to 1) * scaler]
+    // Range: [-1 to 1]
     public double getRightStickY() {
-        return this.gamepad.rightStick.getY() * pilotConfig.globalScaler;
+        return this.gamepad.rightStick.getY();
     }
 
     // Method to get: Difference between Trigger Values
@@ -52,9 +58,5 @@ public class pilot extends Gamepad {
         double right = this.gamepad.rightTriggerButton.getAxis();
         double difference = right-left;
         return difference;
-    }
-
-    public double getTriggerDifferenceScaled() {
-        return getTriggerDifference() * pilotConfig.globalScaler;
     }
 }

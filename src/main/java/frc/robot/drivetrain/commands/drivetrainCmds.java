@@ -10,12 +10,4 @@ public class drivetrainCmds {
     public static void setupDefaultCommand() {
         Robot.drivetrain.setDefaultCommand(new drivetrainByPilotCmd());
     }
-
-    // quick test command
-    public static Command testMotorCmd() {
-        return new RunCommand(                      // Command (runs forever) ...
-            () -> Robot.drivetrain.move(0.5, 0.5),  // Function (moves motors at 0.5 speed)
-            Robot.drivetrain)                       // Subsytem required
-        .withTimeout(2);                            // ... until 2 seconds runs out
-    }
 }

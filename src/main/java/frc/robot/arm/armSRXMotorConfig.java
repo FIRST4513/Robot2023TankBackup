@@ -17,7 +17,7 @@ public class armSRXMotorConfig {
     public static final int armRetractSoftLimitTrheshold = armConfig.armRetractLimit;
 
     // Motion Magic Control Loop Constants
-    public final double feedForwardScaler = 0.25;
+    public static final double feedForwardScaler = 0.0;
     public final double motionCruiseVelocity = 3500;
     public final double motionAcceleration = 4000;
     public static final int allowableError = 10;

@@ -7,7 +7,7 @@ import frc.robot.Robot;
 
 public class intakeCmds {
     public static void setupDefaultCommand() {
-        Robot.intake.setDefaultCommand(stopIntakeCmd());
+        Robot.intake.setDefaultCommand(intakeByCoPilotCmd());
     }
 
     public static Command stopIntakeCmd() {
@@ -24,5 +24,9 @@ public class intakeCmds {
 
     public static Command intakeHoldCmd() {
         return new RunCommand(() -> Robot.intake.setSpeedHold(), Robot.intake);
+    }
+
+    public static Command intakeByCoPilotCmd() {
+        return new RunCommand(() -> Robot.intake.setSpeed(Robot.copilot.getTriggerDifference()), Robot.intake);
     }
 }

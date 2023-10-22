@@ -1,4 +1,4 @@
-// 2 MOTOR DRIVETRAIN OPTIMIZED + NO RIOLOG ERRORS FOR CAN FIRMWARE VERSIONS
+// 4 MOTOR DRIVETRAIN COPY @ OCT 22 2023
 
 package frc.robot.drivetrain;
 
@@ -8,44 +8,56 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotConfig;
 
 public class drivetrain extends SubsystemBase {
-    private WPI_TalonFX left, right;
+    private WPI_TalonFX leftFront, leftBack, rightFront, rightBack;
 
     // Constructor - sets up some things
     public drivetrain() {
         // Instantiate the motors; make them exist
-        left = new WPI_TalonFX(RobotConfig.Motors.LeftMotorBackID);
-        right = new WPI_TalonFX(RobotConfig.Motors.RightMotorBackID);
+        leftFront = new WPI_TalonFX(RobotConfig.Motors.LeftMotorFrontID);
+        leftBack = new WPI_TalonFX(RobotConfig.Motors.LeftMotorBackID);
+        rightFront = new WPI_TalonFX(RobotConfig.Motors.RightMotorFrontID);
+        rightBack = new WPI_TalonFX(RobotConfig.Motors.RightMotorBackID);
 
         // Configure the motors to the factory settings; start fresh
-        left.configFactoryDefault();
-        right.configFactoryDefault();
+        leftFront.configFactoryDefault();
+        leftBack.configFactoryDefault();
+        rightFront.configFactoryDefault();
+        rightBack.configFactoryDefault();
 
         // Set the motors to be inverted or not
         // Constants taken from drivetrainConfig
-        left.setInverted(drivetrainConfig.leftInverted);
-        right.setInverted(drivetrainConfig.rightInverted);
+        leftFront.setInverted(drivetrainConfig.leftInverted);
+        leftBack.setInverted(drivetrainConfig.leftInverted);
+        rightFront.setInverted(drivetrainConfig.rightInverted);
+        rightBack.setInverted(drivetrainConfig.rightInverted);
 
         // Set the motors to coast or brake
         // Constants taken from drivetrainConfig
-        left.setNeutralMode(drivetrainConfig.neutralMode);
-        right.setNeutralMode(drivetrainConfig.neutralMode);
+        leftFront.setNeutralMode(drivetrainConfig.neutralMode);
+        leftBack.setNeutralMode(drivetrainConfig.neutralMode);
+        rightFront.setNeutralMode(drivetrainConfig.neutralMode);
+        rightBack.setNeutralMode(drivetrainConfig.neutralMode);
     }
 
     // ---------- SETTER METHODS ----------
 
     public void stop() {
         // Stop motors
-        left.stopMotor();
-        right.stopMotor();
+        leftFront.stopMotor();
+        leftBack.stopMotor();
+        rightFront.stopMotor();
+        rightBack.stopMotor();
     }
 
     // Takes in a left and right speed
     public void move(double leftSpeed, double rightSpeed) {
     // output ^      ^ input
         // Set left motors to the value given
-        left.set(leftSpeed);
+        leftFront.set(leftSpeed);
+        leftBack.set(leftSpeed);
         // Set right motors to the value given
-        right.set(rightSpeed);
+        rightFront.set(rightSpeed);
+        rightBack.set(rightSpeed);
     }
 
     // Takes in a forward (or backward) speed, and an amount to turn.
@@ -78,24 +90,12 @@ public class drivetrain extends SubsystemBase {
         return output;
     }
 
-    public double encCountsToInches(double counts) {
-        return counts * drivetrainConfig.encoderScale;
-    }
-
     // ---------- GETTER METHODS ----------
     public double getLeftSpeed() {
-        return left.get();
+        return leftFront.get();
     }
 
     public double getRightSpeed() {
-        return right.get();
-    }
-
-    public double getLeftDistance() {
-        return encCountsToInches(left.getSelectedSensorPosition());
-    }
-
-    public double getRightDistance() {
-        return encCountsToInches(right.getSelectedSensorPosition());
+        return rightFront.get();
     }
 }

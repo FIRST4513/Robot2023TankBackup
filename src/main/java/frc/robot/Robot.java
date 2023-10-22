@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.arm.arm;
 import frc.robot.arm.commands.armCmds;
+import frc.robot.copilot.copilot;
 import frc.robot.drivetrain.drivetrain;
 import frc.robot.drivetrain.commands.drivetrainCmds;
 import frc.robot.intake.intake;
@@ -28,6 +29,7 @@ public class Robot extends TimedRobot {
   public static arm arm;
   public static intake intake;
   public static pilot pilot;
+  public static copilot copilot;
   public static RobotTelemetry telemetry;
   // public static copilot copilot;
 
@@ -63,6 +65,7 @@ public class Robot extends TimedRobot {
     arm = new arm();
     intake = new intake();
     pilot = new pilot();
+    copilot = new copilot();
     telemetry = new RobotTelemetry();
     // copilot = new copilot();
   }
@@ -71,7 +74,8 @@ public class Robot extends TimedRobot {
     drivetrainCmds.setupDefaultCommand();
     armCmds.setupDefaultCommand();
     intakeCmds.setupDefaultCommand();
-    // pilot does not have a defualt command (yet)
+    // pilot does not have a defualt command
+    // copilot does not have a default command
   }
 
   @Override
@@ -124,5 +128,6 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().cancelAll();
     CommandScheduler.getInstance().getActiveButtonLoop().clear();
     pilot.resetConfig();
+    copilot.resetConfig();
   }
 }

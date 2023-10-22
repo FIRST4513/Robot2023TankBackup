@@ -12,6 +12,10 @@ public class intake extends SubsystemBase{
     // Constructor
     public intake() {
         intakeMotor = new TalonSRX(RobotConfig.Motors.IntakeMotorBackID);
+        configIntakeMotor();
+    }
+
+    public void configIntakeMotor() {
         intakeMotor.configFactoryDefault();
         intakeMotor.setInverted(intakeConfig.intakeMotorInvert);
     }
