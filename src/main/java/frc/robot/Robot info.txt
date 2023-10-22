@@ -1,8 +1,49 @@
-Real Stow Pos:        110º
+Real Stow Pos:        90º
 Real Ground Pos:      15º
-Real HP Pickup Pos:   90-20º
+Real HP Pickup Pos:   70º
 
-12º absolute position: -454
-90º absolute position: 430
+11º absolute position: 2976
+99º absolute position: 3969
+15  absolute position: 3666.0000000000009
+0 deg enc count: 2851.875
+
+Soft Limit Max: 110º
+Soft Limit Min: 12º
 
 Need intake reverse:   true
+
+--- calculations ---
+angle difference: 99-11 = 88
+enc count difference: 993
+degs/count : 0.088620342
+counts/deg : 11.28409091
+
+
+
+--- ps ports ---
+Left Stick:
+- 0: X axis
+- 1: Y axis
+Right Stick:
+- 2: Z axis (x)
+- 5: Z Rotate (y)
+Triggers:
+- 3: X rotate (left)
+- 4: Y rotate (right)
+Dpad:
+- POV buttons and angles, no differences
+Other Buttons:
+- 1: Square
+- 2: X
+- 3: Circle
+- 4: Triangle
+- 5: LB
+- 6: RB
+- 7: Left Trigger pressed
+- 8: Right Trigger pressed
+- 9: Share
+- 10: Options
+- 11: Left Stick Down
+- 12: Right Stick Down
+- 13: PS Button
+- 14: Trackpad Pressed

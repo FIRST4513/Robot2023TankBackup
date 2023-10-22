@@ -13,7 +13,8 @@ public class armTelemetry {
         // arm
         tab.addNumber("ARM- Enc Val", () -> Robot.arm.getEncoderPosition());
         tab.addNumber("ARM- Motor Speed", () -> Robot.arm.getArmSpeed());
-        // [arm angle]
+        tab.addNumber("ARM- angle", () -> Robot.arm.currentArmAngle);
+        tab.addNumber("ARM- Taget Angle", () -> Robot.arm.getArmTargetAngle());
 
         // [extend switch pressed]
         // [retract switch pressed]

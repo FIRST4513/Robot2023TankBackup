@@ -18,15 +18,20 @@ public class pilot extends Gamepad {
     }
 
     // ---------- GAMEPAD SPECIFIC COMMANDS ----------
+    
     // Function to setup buttons for when the robot is in Teleop mode (used often)
     public void setupTeleopButtons() {
         // intake stuff
         gamepad.leftBumper.whileTrue(intakeCmds.intakeEjectCmd());
         gamepad.rightBumper.whileTrue(intakeCmds.intakeRetractCmd());
         gamepad.yButton.whileTrue(intakeCmds.intakeHoldCmd());
-        // gamepad.xButton.onTrue(intakeCmds.stopIntakeCmd());
 
         // arm stuff
+        // gamepad.Dpad.Down.onTrue(new RunCommand(() -> System.out.println("Dpad Down")));
+        gamepad.Dpad.Down.onTrue(armCmds.armToGroundCmd());
+        gamepad.Dpad.Right.onTrue(armCmds.armToStowCmd());
+        gamepad.Dpad.Left.onTrue(armCmds.armToStowCmd());
+        gamepad.Dpad.Up.onTrue(armCmds.armToStationCmd());
         gamepad.aButton.whileTrue(armCmds.armByPilotCmd());
     }
 
