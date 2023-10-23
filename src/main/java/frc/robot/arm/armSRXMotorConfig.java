@@ -23,6 +23,7 @@ public class armSRXMotorConfig {
     public static final int allowableError = 10;
     public final int motionCurveStrength = 0;
 
+    // PID Loop Constants
     public final double kP = 3.0;
     public final double kI = 0.0;
     public final double kD = 0.0;
@@ -46,6 +47,7 @@ public class armSRXMotorConfig {
     public final double kV = 0;
     public final double kA = 0;
 
+    // ---------- CONSTRUCTOR ----------
     public armSRXMotorConfig() {
         config.slot0.kP = kP;
         config.slot0.kI = kI;

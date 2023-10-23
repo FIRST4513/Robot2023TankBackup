@@ -22,8 +22,6 @@ public class armCmds {
         .withName("Stop Arm Cmd");
     }
 
-    // positions
-
     public static Command armToAngleCmd(double angle) {
         return new InstantCommand(() -> Robot.arm.setMMAngle(angle), Robot.arm);
     }

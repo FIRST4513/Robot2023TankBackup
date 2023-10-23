@@ -20,7 +20,7 @@ public class arm extends SubsystemBase {
 
     public double targetArmAngle = armConfig.armStowAngle;
 
-    // constructor
+    // ---------- CONSTRUCTOR ----------
     public arm() {
         motorConfig = new armSRXMotorConfig();
         armMotor = new TalonSRX(RobotConfig.Motors.ArmMotorID);
@@ -38,6 +38,8 @@ public class arm extends SubsystemBase {
         armMotor.configFactoryDefault();
         armMotor.configAllSettings(armSRXMotorConfig.config);
         armMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
+        armMotor.configForwardSoftLimitThreshold(encAngleToCounts(armConfig.armExtendLimit));
+        armMotor.configReverseSoftLimitThreshold(encAngleToCounts(armConfig.armRetractLimit));
     }
 
     public void updateCurrentArmAngle() {

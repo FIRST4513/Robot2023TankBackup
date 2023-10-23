@@ -10,7 +10,9 @@ import frc.robot.intake.commands.intakeCmds;
 import frc.robot.pilot.commands.pilotCmds;
 
 public class pilot extends Gamepad {
-    // Constructor: Sets up gamepad to be used
+    
+    // ---------- CONSTRUCTOR ----------
+    
     public pilot() {
         // Since we are extending (taking code from Gamepad) (also called Inheritance)
         // We need to call the pilot() function in the Gamepad libraries with super.
@@ -31,7 +33,7 @@ public class pilot extends Gamepad {
     // Test buttons (used when debugging sometimes)
     public void setupTestButtons() {}
     
-    // ---------- CUSTOM DRIVE METHODS ----------
+    // ---------- GETTER METHODS FOR INPUTS ----------
 
     // Method to get: Xbox Left Stick Y
     // Range: [(-1 to 1) * scaler]

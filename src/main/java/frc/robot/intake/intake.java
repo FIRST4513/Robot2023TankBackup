@@ -9,18 +9,22 @@ import frc.robot.RobotConfig;
 public class intake extends SubsystemBase{
     public TalonSRX intakeMotor;
 
-    // Constructor
+    // ---------- CONSTRUCTOR ----------
+    
     public intake() {
         intakeMotor = new TalonSRX(RobotConfig.Motors.IntakeMotorBackID);
         configIntakeMotor();
     }
 
+    // ---------- CONFIGURATION METHODS ----------
+
+    // config the motors
     public void configIntakeMotor() {
         intakeMotor.configFactoryDefault();
         intakeMotor.setInverted(intakeConfig.intakeMotorInvert);
     }
 
-    // setter methods
+    // ---------- SETTER METHODS ----------
 
     public void setSpeed(double speed) {
         intakeMotor.set(TalonSRXControlMode.PercentOutput, speed);
@@ -42,7 +46,7 @@ public class intake extends SubsystemBase{
         setSpeed(intakeConfig.ejectSpeed);
     }
 
-    // getter methods
+    // ---------- GETTER METHODS ----------
 
     public double getIntakeSpeed() {
         return intakeMotor.getMotorOutputPercent();

@@ -10,7 +10,8 @@ import frc.robot.RobotConfig;
 public class drivetrain extends SubsystemBase {
     private WPI_TalonFX left, right;
 
-    // Constructor - sets up some things
+    // ---------- CONSTRUCTOR ----------
+
     public drivetrain() {
         // Instantiate the motors; make them exist
         left = new WPI_TalonFX(RobotConfig.Motors.LeftMotorBackID);
@@ -83,6 +84,7 @@ public class drivetrain extends SubsystemBase {
     }
 
     // ---------- GETTER METHODS ----------
+    
     public double getLeftSpeed() {
         return left.get();
     }

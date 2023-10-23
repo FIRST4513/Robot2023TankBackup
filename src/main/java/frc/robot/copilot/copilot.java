@@ -10,15 +10,15 @@ import frc.robot.drivetrain.commands.drivetrainCmds;
 import frc.robot.intake.commands.intakeCmds;
 
 public class copilot extends Gamepad {
-    // Constructor: Sets up gamepad to be used
+    
+    // ---------- CONSTRUCTOR ----------
+
     public copilot() {
-        // Since we are extending (taking code from Gamepad) (also called Inheritance)
-        // We need to call the pilot() function in the Gamepad libraries with super.
-        // Further sets up the pilot gamepad
         super("Co-Pilot Gamepad", RobotConfig.Gamepads.CopilotGamepadPort);
     }
 
     // ---------- GAMEPAD SPECIFIC COMMANDS ----------
+
     // Function to setup buttons for when the robot is in Teleop mode (used often)
     public void setupTeleopButtons() {
         // buttons to manually halt arm & intake
@@ -37,7 +37,7 @@ public class copilot extends Gamepad {
     // Test buttons (used when debugging sometimes)
     public void setupTestButtons() {}
     
-    // ---------- CUSTOM DRIVE METHODS ----------
+    // ---------- GETTER METHODS FOR INPUTS ----------
 
     // Method to get: Xbox Left Stick Y
     // Range: [-1 to 1]

@@ -12,18 +12,23 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.arm.arm;
 import frc.robot.arm.commands.armCmds;
 import frc.robot.copilot.copilot;
+import frc.robot.copilot.commands.copilotCmds;
 import frc.robot.drivetrain.drivetrain;
 import frc.robot.drivetrain.commands.drivetrainCmds;
 import frc.robot.intake.intake;
 import frc.robot.intake.commands.intakeCmds;
+import frc.robot.pilot.pilot;
+import frc.robot.pilot.commands.pilotCmds;
+
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
  * the package after creating this project, you must also update the build.gradle file in the
  * project.
  */
-import frc.robot.pilot.pilot;
+
 public class Robot extends TimedRobot {
+  
   // Declaration of substystems
   public static drivetrain drivetrain;
   public static arm arm;
@@ -31,9 +36,8 @@ public class Robot extends TimedRobot {
   public static pilot pilot;
   public static copilot copilot;
   public static RobotTelemetry telemetry;
-  // public static copilot copilot;
 
-  // OPTIONAL: Declaration and Instantiation of timer
+  // Declaration and instantiation of timer
   public static Timer sysTimer = new Timer();
 
   /**
@@ -42,21 +46,13 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    // OPTIONAL: Reset and start timer, then intialize robot subsystems
+    // Reset and start timer
     sysTimer.reset();
     sysTimer.start();
 
-    // prints some info so we can see stuff happen
-    System.out.println("Robot init-ted");
-
-    // call the function to setup our subsystems
+    // Initialize subsystems and setup default commands
     initSubsystems();
-
-    System.out.println("Init subsystems done");
-
     setupDefaultCommands();
-
-    System.out.println("Default Commands setup");
   }
 
   private void initSubsystems() {
@@ -67,15 +63,14 @@ public class Robot extends TimedRobot {
     pilot = new pilot();
     copilot = new copilot();
     telemetry = new RobotTelemetry();
-    // copilot = new copilot();
   }
 
   private void setupDefaultCommands() {
     drivetrainCmds.setupDefaultCommand();
     armCmds.setupDefaultCommand();
     intakeCmds.setupDefaultCommand();
-    // pilot does not have a defualt command
-    // copilot does not have a default command
+    pilotCmds.setupDefaultCommand();
+    copilotCmds.setupDefaultCommand();
   }
 
   @Override
