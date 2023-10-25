@@ -24,7 +24,7 @@ public class armSRXMotorConfig {
     public final int motionCurveStrength = 0;
 
     // PID Loop Constants
-    public final double kP = 3.0;
+    public final double kP = 3.5;
     public final double kI = 0.0;
     public final double kD = 0.0;
     public final double kF = 0.0;

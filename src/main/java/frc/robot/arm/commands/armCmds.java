@@ -8,7 +8,7 @@ import frc.robot.arm.armConfig;
 
 public class armCmds {
     public static void setupDefaultCommand() {
-        // Robot.arm.setDefaultCommand(stopArmCmd());
+        // Robot.arm.setDefaultCommand(armAdjustTargetByPilotCmd());
     }
 
     public static Command armByPilotCmd() {

@@ -59,4 +59,8 @@ public class copilot extends Gamepad {
         double difference = right-left;
         return difference;
     }
+
+    public void setRumble(double dum) {
+        this.gamepad.setRumble(dum, dum);
+    }
 }

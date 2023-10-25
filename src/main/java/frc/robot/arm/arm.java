@@ -34,6 +34,10 @@ public class arm extends SubsystemBase {
         currentArmPower = armMotor.getMotorOutputPercent();
     }
 
+    public void adjustTargetAngle(double angle) {
+        setMMAngle(currentArmAngle - angle);
+    }
+
     public void configArmMotor() {
         armMotor.configFactoryDefault();
         armMotor.configAllSettings(armSRXMotorConfig.config);

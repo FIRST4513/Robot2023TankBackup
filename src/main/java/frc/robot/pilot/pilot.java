@@ -25,6 +25,7 @@ public class pilot extends Gamepad {
     // Function to setup buttons for when the robot is in Teleop mode (used often)
     public void setupTeleopButtons() {
         this.gamepad.aButton.whileTrue(pilotCmds.pilotHaltDrivetrainCmd());
+        this.gamepad.leftBumper.whileTrue(armCmds.armByPilotCmd());
     }
 
     // Disabled buttons (almost never used)

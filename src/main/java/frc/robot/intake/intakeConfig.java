@@ -5,5 +5,5 @@ public class intakeConfig {
     public static final double holdSpeed = -0.3;
     public static final double ejectSpeed = 1.0;
 
-    public static final boolean intakeMotorInvert = true;
+    public static final boolean intakeMotorInvert = false;
 }
