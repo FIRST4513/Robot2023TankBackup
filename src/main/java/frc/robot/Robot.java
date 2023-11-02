@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.arm.arm;
 import frc.robot.arm.commands.armCmds;
+import frc.robot.auto.AutoCmds;
 import frc.robot.copilot.copilot;
 import frc.robot.copilot.commands.copilotCmds;
 import frc.robot.drivetrain.drivetrain;
@@ -79,7 +80,11 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void autonomousInit() {}
+  public void autonomousInit() {
+    resetCommandsAndButtons();
+    // AutoCmds.EjectOnlyCmd().schedule();
+    AutoCmds.EjectAndCrossCmd().schedule();
+  }
 
   @Override
   public void autonomousPeriodic() {}

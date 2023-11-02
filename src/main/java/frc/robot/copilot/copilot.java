@@ -59,7 +59,12 @@ public class copilot extends Gamepad {
         double difference = right-left;
         return difference;
     }
-
+    public double getTriggerDifferenceInvert() {
+        double left = this.gamepad.leftTriggerButton.getAxis();
+        double right = this.gamepad.rightTriggerButton.getAxis();
+        double difference = right-left;
+        return -difference;
+    }
     public void setRumble(double dum) {
         this.gamepad.setRumble(dum, dum);
     }

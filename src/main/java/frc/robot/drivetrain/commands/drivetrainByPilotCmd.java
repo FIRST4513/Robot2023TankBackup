@@ -1,12 +1,15 @@
 package frc.robot.drivetrain.commands;
 
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
+import frc.robot.drivetrain.drivetrain;
 
 public class drivetrainByPilotCmd extends CommandBase {
     public drivetrainByPilotCmd() {
         // tell the robot that the drivetrain is being used by this command
-        addRequirements(Robot.drivetrain);
+    addRequirements(Robot.drivetrain);
+    
     }
 
     public void initialize() {

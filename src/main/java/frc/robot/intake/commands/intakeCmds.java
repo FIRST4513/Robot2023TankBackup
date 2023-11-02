@@ -27,6 +27,6 @@ public class intakeCmds {
     }
 
     public static Command intakeByCoPilotCmd() {
-        return new RunCommand(() -> Robot.intake.setSpeed(Robot.copilot.getTriggerDifference()), Robot.intake);
+        return new RunCommand(() -> Robot.intake.setSpeed(Robot.copilot.getTriggerDifferenceInvert()), Robot.intake);
     }
 }

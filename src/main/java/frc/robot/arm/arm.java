@@ -55,6 +55,10 @@ public class arm extends SubsystemBase {
         return targetArmAngle;
     }
 
+    public double getArmCurrentAngle() {
+        return currentArmAngle;
+    }
+
     public boolean isAtTarget() {
         if (((targetArmAngle-armConfig.isAtTargetError) < currentArmAngle) && (currentArmAngle < (targetArmAngle+armConfig.isAtTargetError))) {
             return true;

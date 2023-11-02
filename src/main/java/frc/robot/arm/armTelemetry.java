@@ -14,7 +14,7 @@ public class armTelemetry {
         // Important things
         tab.addNumber("ARM- Target Angle", () -> Robot.arm.getArmTargetAngle()) .withSize(2, 1) .withPosition(0, 0);
         tab.addBoolean("ARM- At Target?", () -> Robot.arm.isAtTarget())         .withSize(2, 1) .withPosition(0, 1);
-        tab.addNumber("ARM- Current Angle", () -> Robot.arm.currentArmAngle)    .withSize(2, 1) .withPosition(0, 2);
+        tab.addNumber("ARM- Current Angle", () -> Robot.arm.getArmCurrentAngle())    .withSize(2, 1) .withPosition(0, 2);
         
         // Other info
         tab.addNumber("ARM- Enc Val", () -> Robot.arm.getEncoderPosition()) .withSize(2, 1) .withPosition(3, 0);
